@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
+using ToDoList.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

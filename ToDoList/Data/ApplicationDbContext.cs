@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using ToDoList.Models.Database;
 
 namespace ToDoList.Data
 {
@@ -8,9 +10,6 @@ namespace ToDoList.Data
         {
         }
 
-        public DbSet<Category> Category { get; set; }
-        public DbSet<Red_Mojatablica> Mojatablica { get; set; }
-
-        public DbSet<Product> Product { get; set; }
+        public DbSet<ToDo> ToDos { get; set; }
     }
 }
