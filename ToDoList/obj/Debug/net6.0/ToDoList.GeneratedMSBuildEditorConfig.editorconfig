@@ -15,6 +15,26 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\mihael.ladic\Documents\Faks\drugi_PWEB\PWEB_ToDoList\ToDoList
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/Comments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbWVudHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/Comments/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbWVudHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/Comments/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbWVudHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/Comments/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbWVudHNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/Comments/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbWVudHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -29,6 +49,46 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/ToDos/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9Eb3NcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/ToDos/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9Eb3NcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/ToDos/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9Eb3NcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/ToDos/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9Eb3NcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/ToDos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9Eb3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/Topics/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/Topics/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/Topics/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/Topics/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/Topics/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9waWNzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/mihael.ladic/Documents/Faks/drugi_PWEB/PWEB_ToDoList/ToDoList/Views/_ViewImports.cshtml]
