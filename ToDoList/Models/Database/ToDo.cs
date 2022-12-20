@@ -26,6 +26,8 @@ namespace ToDoList.Models.Database
 
         [Display(Name = "Tema")]
         public Topic? Topic { get; set; }
+        
+        public List<Comment> Comments { get; set; }
 
         public static Faker<ToDo> GetFaker(List<int> topicIDs)
         {

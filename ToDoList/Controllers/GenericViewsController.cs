@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.EntityFrameworkCore;
 using ToDoList.Data;
+using ToDoList.Models.ViewModels;
 
 namespace ToDoList.Controllers
 {
@@ -14,7 +15,7 @@ namespace ToDoList.Controllers
             _context = context;
         }
 
-        [HttpGet("toDosByUser/{name}")]
+        [HttpGet("TODO/toDosByUser/{name}")]
         public IActionResult toDosByUser(string name)
         {
             var user = _context.UserDatas.FirstOrDefault(p => p.FirstName.ToLower() == name.ToLower());
@@ -24,10 +25,25 @@ namespace ToDoList.Controllers
                                                     .ThenInclude(p => p.Topic)
                                                     .Where(p => p.UserId == user.Id)
                                                     .OrderByDescending(p => p.ToDo.CreatedDate)
-                                                    .Select(p => p.ToDo);
+                                                    .Select(p => p.ToDo)
+                                                    .ToList();
 
 
-            return View(tasks);
+            return View(new UserTasksVM() { User = user, ToDos = tasks});
         }
+
+        [HttpGet("TODO/Topics")]
+        public IActionResult Topics()
+        {
+            return View(_context.Topics.Include(p => p.ToDos));
+        }
+
+        [HttpGet("TODO/UserData")]
+        public IActionResult UsersWithData()
+        {
+            return View(_context.UserDatas.Include(p => p.PersonalData));
+        }
+
+
     }
 }

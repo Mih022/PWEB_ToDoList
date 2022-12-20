@@ -1,0 +1,24 @@
+﻿@model IEnumerable<ToDoList.Models.Database.UserData>
+
+@{
+    ViewData["Title"] = "Korisnički podatci";
+}
+@{
+    await Html.RenderPartialAsync("_Used_routes");
+}
+
+<h1>Korisnički podatci</h1>
+
+@foreach (var item in Model) {
+    <h2>@item.FirstName @item.LastName</h2>
+    <ul>
+        <li>Datum rođenja: @item.PersonalData.DOB</li>
+        <li>Email: @item.PersonalData.Email</li>
+        <li>Broj telefona: @item.PersonalData.PhoneNumber</li>
+    </ul>
+    <h4>Kratki opis:</h4>
+    <p>
+        @item.PersonalData.Bio
+    </p>
+    <br />
+}

@@ -16333,6 +16333,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\mihael.ladic\\Documents\\Faks\\drugi_PWEB\\PWEB_ToDoList\\ToDoList\\Views\\Shared\\_Used_routes.cshtml",
+      "TargetPath": "Views\\Shared\\_Used_routes.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\mihael.ladic\\Documents\\Faks\\drugi_PWEB\\PWEB_ToDoList\\ToDoList\\Views\\GenericViews\\UsersWithData.cshtml",
+      "TargetPath": "Views\\GenericViews\\UsersWithData.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\mihael.ladic\\Documents\\Faks\\drugi_PWEB\\PWEB_ToDoList\\ToDoList\\Views\\UserDatas\\Edit.cshtml",
       "TargetPath": "Views\\UserDatas\\Edit.cshtml",
       "FileKind": "mvc"
@@ -16455,6 +16465,11 @@
     {
       "FilePath": "c:\\Users\\mihael.ladic\\Documents\\Faks\\drugi_PWEB\\PWEB_ToDoList\\ToDoList\\Views\\Comments\\Create.cshtml",
       "TargetPath": "Views\\Comments\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\mihael.ladic\\Documents\\Faks\\drugi_PWEB\\PWEB_ToDoList\\ToDoList\\Views\\GenericViews\\Topics.cshtml",
+      "TargetPath": "Views\\GenericViews\\Topics.cshtml",
       "FileKind": "mvc"
     },
     {

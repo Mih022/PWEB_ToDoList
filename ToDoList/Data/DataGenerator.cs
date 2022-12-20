@@ -34,7 +34,7 @@ namespace ToDoList.Data
             var relationFaker = User_ToDo_Relation.GetFaker(userIDs, todoIDs);
             context.User_ToDo_Relations.AddRange(relationFaker.Generate(usToDoRelationCount));
 
-            var commentFaker = Comment.GetFaker(userIDs);
+            var commentFaker = Comment.GetFaker(userIDs, todoIDs);
             context.Comments.AddRange(commentFaker.Generate(commentCount));
             context.SaveChanges();
         }

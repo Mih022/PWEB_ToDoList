@@ -1,13 +1,18 @@
-﻿@model IEnumerable<ToDoList.Models.Database.ToDo>
+﻿@model ToDoList.Models.ViewModels.UserTasksVM
 
-@foreach (var item in Model)
+@{
+    await Html.RenderPartialAsync("_Used_routes");
+}
+<h1>Zadatci za korisnika @Model.User.FirstName @Model.User.LastName</h1>
+
+@foreach (var item in Model.ToDos)
 {
     <h1>@Html.DisplayFor(modelItem => item.Name)</h1>
     <div>
         <ul>
-            <li>Kreirano: @Html.DisplayFor(modelItem => item.CreatedDate)</li>
-            <li>Obavljeno: @Html.DisplayFor(modelItem => item.CompletedDate)</li>
-            <li>Pripada temi: @Html.DisplayFor(modelItem => item.Topic.Name)</li>
+            <li>Kreirano: @item.CreatedDate</li>
+            <li>Obavljeno: @item.CompletedDate</li>
+            <li>Pripada temi: @item.Topic.Name</li>
         </ul>
     </div>
     <h3>Opis</h3>

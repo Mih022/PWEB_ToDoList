@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDoList.Data;
 
@@ -10,9 +11,11 @@ using ToDoList.Data;
 namespace ToDoList.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221220204141_comment_user_relation")]
+    partial class commentuserrelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
@@ -39,7 +42,7 @@ namespace ToDoList.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("ToDoList.Models.Database.PersonalData", b =>
@@ -65,7 +68,7 @@ namespace ToDoList.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PersonalDatas", (string)null);
+                    b.ToTable("PersonalDatas");
                 });
 
             modelBuilder.Entity("ToDoList.Models.Database.ToDo", b =>
@@ -95,7 +98,7 @@ namespace ToDoList.Migrations
 
                     b.HasIndex("TopicID");
 
-                    b.ToTable("ToDos", (string)null);
+                    b.ToTable("ToDos");
                 });
 
             modelBuilder.Entity("ToDoList.Models.Database.Topic", b =>
@@ -110,7 +113,7 @@ namespace ToDoList.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Topics", (string)null);
+                    b.ToTable("Topics");
                 });
 
             modelBuilder.Entity("ToDoList.Models.Database.UserData", b =>
@@ -134,7 +137,7 @@ namespace ToDoList.Migrations
 
                     b.HasIndex("PersonalDataID");
 
-                    b.ToTable("UserDatas", (string)null);
+                    b.ToTable("UserDatas");
                 });
 
             modelBuilder.Entity("ToDoList.Models.Database.User_ToDo_Relation", b =>
@@ -155,7 +158,7 @@ namespace ToDoList.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("User_ToDo_Relations", (string)null);
+                    b.ToTable("User_ToDo_Relations");
                 });
 
             modelBuilder.Entity("ToDoList.Models.Database.Comment", b =>

@@ -11,6 +11,8 @@ namespace ToDoList.Models.Database
         [Display(Name="Ime")]
         public string Name { get; set; }
 
+        public List<ToDo> ToDos { get; set; }
+
         public static Faker<Topic> GetFaker()
         {
             return new Faker<Topic>("hr")

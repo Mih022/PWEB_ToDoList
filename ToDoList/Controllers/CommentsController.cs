@@ -49,6 +49,7 @@ namespace ToDoList.Controllers
         public IActionResult Create()
         {
             ViewData["ToDoID"] = new SelectList(_context.ToDos, "Id", "Name");
+            ViewData["UserID"] = new SelectList(_context.UserDatas, "Id", "FirstName");
             return View();
         }
 
@@ -57,7 +58,7 @@ namespace ToDoList.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Text,ToDoID")] Comment comment)
+        public async Task<IActionResult> Create([Bind("Id,Text,ToDoID,UserID")] Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +67,7 @@ namespace ToDoList.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ToDoID"] = new SelectList(_context.ToDos, "Id", "Name", comment.ToDoID);
+            ViewData["UserID"] = new SelectList(_context.UserDatas, "Id", "FirstName");
             return View(comment);
         }
 
@@ -83,6 +85,7 @@ namespace ToDoList.Controllers
                 return NotFound();
             }
             ViewData["ToDoID"] = new SelectList(_context.ToDos, "Id", "Name", comment.ToDoID);
+            ViewData["UserID"] = new SelectList(_context.UserDatas, "Id", "FirstName", comment.UserID);
             return View(comment);
         }
 
@@ -91,7 +94,7 @@ namespace ToDoList.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Text,ToDoID")] Comment comment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Text,ToDoID,UserID")] Comment comment)
         {
             if (id != comment.Id)
             {
@@ -119,6 +122,7 @@ namespace ToDoList.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ToDoID"] = new SelectList(_context.ToDos, "Id", "Name", comment.ToDoID);
+            ViewData["UserID"] = new SelectList(_context.UserDatas, "Id", "FirstName", comment.UserID);
             return View(comment);
         }
 
