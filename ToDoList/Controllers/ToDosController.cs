@@ -48,7 +48,7 @@ namespace ToDoList.Controllers
         // GET: ToDos/Create
         public IActionResult Create()
         {
-            ViewData["TopicID"] = new SelectList(_context.Topic, "Id", "Name");
+            ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace ToDoList.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TopicID"] = new SelectList(_context.Topic, "Id", "Name", toDo.TopicID);
+            ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name", toDo.TopicID);
             return View(toDo);
         }
 
@@ -82,7 +82,7 @@ namespace ToDoList.Controllers
             {
                 return NotFound();
             }
-            ViewData["TopicID"] = new SelectList(_context.Topic, "Id", "Name", toDo.TopicID);
+            ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name", toDo.TopicID);
             return View(toDo);
         }
 
@@ -118,7 +118,7 @@ namespace ToDoList.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TopicID"] = new SelectList(_context.Topic, "Id", "Name", toDo.TopicID);
+            ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name", toDo.TopicID);
             return View(toDo);
         }
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Bogus;
+using System.ComponentModel.DataAnnotations;
 
 namespace ToDoList.Models.Database
 {
@@ -9,5 +10,11 @@ namespace ToDoList.Models.Database
         [Required]
         [Display(Name="Ime")]
         public string Name { get; set; }
+
+        public static Faker<Topic> GetFaker()
+        {
+            return new Faker<Topic>("hr")
+                .RuleFor(p => p.Name, x => x.Commerce.Department());
+        }
     }
 }

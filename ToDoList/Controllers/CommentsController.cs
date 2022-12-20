@@ -22,19 +22,19 @@ namespace ToDoList.Controllers
         // GET: Comments
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Comment.Include(c => c.ToDo);
+            var applicationDbContext = _context.Comments.Include(c => c.ToDo);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Comments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Comment == null)
+            if (id == null || _context.Comments == null)
             {
                 return NotFound();
             }
 
-            var comment = await _context.Comment
+            var comment = await _context.Comments
                 .Include(c => c.ToDo)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (comment == null)
@@ -72,12 +72,12 @@ namespace ToDoList.Controllers
         // GET: Comments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Comment == null)
+            if (id == null || _context.Comments == null)
             {
                 return NotFound();
             }
 
-            var comment = await _context.Comment.FindAsync(id);
+            var comment = await _context.Comments.FindAsync(id);
             if (comment == null)
             {
                 return NotFound();
@@ -125,12 +125,12 @@ namespace ToDoList.Controllers
         // GET: Comments/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Comment == null)
+            if (id == null || _context.Comments == null)
             {
                 return NotFound();
             }
 
-            var comment = await _context.Comment
+            var comment = await _context.Comments
                 .Include(c => c.ToDo)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (comment == null)
@@ -146,14 +146,14 @@ namespace ToDoList.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Comment == null)
+            if (_context.Comments == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Comment'  is null.");
             }
-            var comment = await _context.Comment.FindAsync(id);
+            var comment = await _context.Comments.FindAsync(id);
             if (comment != null)
             {
-                _context.Comment.Remove(comment);
+                _context.Comments.Remove(comment);
             }
             
             await _context.SaveChangesAsync();
@@ -162,7 +162,7 @@ namespace ToDoList.Controllers
 
         private bool CommentExists(int id)
         {
-          return _context.Comment.Any(e => e.Id == id);
+          return _context.Comments.Any(e => e.Id == id);
         }
     }
 }

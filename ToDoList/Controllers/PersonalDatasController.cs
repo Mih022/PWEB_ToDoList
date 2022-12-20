@@ -22,18 +22,18 @@ namespace ToDoList.Controllers
         // GET: PersonalDatas
         public async Task<IActionResult> Index()
         {
-              return View(await _context.PersonalData.ToListAsync());
+              return View(await _context.PersonalDatas.ToListAsync());
         }
 
         // GET: PersonalDatas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.PersonalData == null)
+            if (id == null || _context.PersonalDatas == null)
             {
                 return NotFound();
             }
 
-            var personalData = await _context.PersonalData
+            var personalData = await _context.PersonalDatas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (personalData == null)
             {
@@ -68,12 +68,12 @@ namespace ToDoList.Controllers
         // GET: PersonalDatas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.PersonalData == null)
+            if (id == null || _context.PersonalDatas == null)
             {
                 return NotFound();
             }
 
-            var personalData = await _context.PersonalData.FindAsync(id);
+            var personalData = await _context.PersonalDatas.FindAsync(id);
             if (personalData == null)
             {
                 return NotFound();
@@ -119,12 +119,12 @@ namespace ToDoList.Controllers
         // GET: PersonalDatas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.PersonalData == null)
+            if (id == null || _context.PersonalDatas == null)
             {
                 return NotFound();
             }
 
-            var personalData = await _context.PersonalData
+            var personalData = await _context.PersonalDatas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (personalData == null)
             {
@@ -139,14 +139,14 @@ namespace ToDoList.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.PersonalData == null)
+            if (_context.PersonalDatas == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.PersonalData'  is null.");
             }
-            var personalData = await _context.PersonalData.FindAsync(id);
+            var personalData = await _context.PersonalDatas.FindAsync(id);
             if (personalData != null)
             {
-                _context.PersonalData.Remove(personalData);
+                _context.PersonalDatas.Remove(personalData);
             }
             
             await _context.SaveChangesAsync();
@@ -155,7 +155,7 @@ namespace ToDoList.Controllers
 
         private bool PersonalDataExists(int id)
         {
-          return _context.PersonalData.Any(e => e.Id == id);
+          return _context.PersonalDatas.Any(e => e.Id == id);
         }
     }
 }

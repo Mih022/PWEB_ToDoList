@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "OQHpjkx1NZ6Y7TVOrwhpdsY90J9a/3CSY99mfjkeXTwIrud109DGJu/Fu9MzICOzAYKLQmdlAiEr6VwCOKHpeA==",
+  "dgSpecHash": "nlxkYRkv65U6Gs61LKx4WPpowSpUznd4WfTffZdOjPygr0WZ7iU+MsBR7/q4FG1zjhV4k8tnDmqOG9yV7grNBw==",
   "success": true,
   "projectFilePath": "C:\\Users\\mihael.ladic\\Documents\\Faks\\drugi_PWEB\\PWEB_ToDoList\\ToDoList\\ToDoList.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\mihael.ladic\\.nuget\\packages\\bogus\\34.0.2\\bogus.34.0.2.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",

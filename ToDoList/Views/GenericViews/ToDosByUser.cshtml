@@ -1,0 +1,16 @@
+﻿@model IEnumerable<ToDoList.Models.Database.ToDo>
+
+@foreach (var item in Model)
+{
+    <h1>@Html.DisplayFor(modelItem => item.Name)</h1>
+    <div>
+        <ul>
+            <li>Kreirano: @Html.DisplayFor(modelItem => item.CreatedDate)</li>
+            <li>Obavljeno: @Html.DisplayFor(modelItem => item.CompletedDate)</li>
+            <li>Pripada temi: @Html.DisplayFor(modelItem => item.Topic.Name)</li>
+        </ul>
+    </div>
+    <h3>Opis</h3>
+    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+    <br />
+}

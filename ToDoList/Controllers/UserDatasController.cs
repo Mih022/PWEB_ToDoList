@@ -22,19 +22,19 @@ namespace ToDoList.Controllers
         // GET: UserDatas
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.UserData.Include(u => u.PersonalData);
+            var applicationDbContext = _context.UserDatas.Include(u => u.PersonalData);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: UserDatas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.UserData == null)
+            if (id == null || _context.UserDatas == null)
             {
                 return NotFound();
             }
 
-            var userData = await _context.UserData
+            var userData = await _context.UserDatas
                 .Include(u => u.PersonalData)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (userData == null)
@@ -48,7 +48,7 @@ namespace ToDoList.Controllers
         // GET: UserDatas/Create
         public IActionResult Create()
         {
-            var takenPDs = _context.UserData.Where(p => p.PersonalDataID != null)
+            var takenPDs = _context.UserDatas.Where(p => p.PersonalDataID != null)
                                             .Select(p => p.PersonalDataID)
                                             .ToList();
             var validPDs = _context.Set<PersonalData>().Where(p => !takenPDs.Contains(p.Id));
@@ -76,17 +76,22 @@ namespace ToDoList.Controllers
         // GET: UserDatas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.UserData == null)
+            if (id == null || _context.UserDatas == null)
             {
                 return NotFound();
             }
 
-            var userData = await _context.UserData.FindAsync(id);
+            var userData = await _context.UserDatas.FindAsync(id);
             if (userData == null)
             {
                 return NotFound();
             }
-            ViewData["PersonalDataID"] = new SelectList(_context.Set<PersonalData>(), "Id", "Id", userData.PersonalDataID);
+            var takenPDs = _context.UserDatas.Where(p => p.PersonalDataID != null)
+                                .Select(p => p.PersonalDataID)
+                                .ToList();
+            var validPDs = _context.Set<PersonalData>().Where(p => !takenPDs.Contains(p.Id) || 
+                                                            p.Id == userData.PersonalDataID);
+            ViewData["PersonalDataID"] = new SelectList(validPDs, "Id", "Email");
             return View(userData);
         }
 
@@ -129,12 +134,12 @@ namespace ToDoList.Controllers
         // GET: UserDatas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.UserData == null)
+            if (id == null || _context.UserDatas == null)
             {
                 return NotFound();
             }
 
-            var userData = await _context.UserData
+            var userData = await _context.UserDatas
                 .Include(u => u.PersonalData)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (userData == null)
@@ -150,14 +155,14 @@ namespace ToDoList.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.UserData == null)
+            if (_context.UserDatas == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.UserData'  is null.");
             }
-            var userData = await _context.UserData.FindAsync(id);
+            var userData = await _context.UserDatas.FindAsync(id);
             if (userData != null)
             {
-                _context.UserData.Remove(userData);
+                _context.UserDatas.Remove(userData);
             }
             
             await _context.SaveChangesAsync();
@@ -166,7 +171,7 @@ namespace ToDoList.Controllers
 
         private bool UserDataExists(int id)
         {
-          return _context.UserData.Any(e => e.Id == id);
+          return _context.UserDatas.Any(e => e.Id == id);
         }
     }
 }
