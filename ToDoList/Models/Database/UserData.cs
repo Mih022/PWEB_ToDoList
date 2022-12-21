@@ -30,7 +30,7 @@ namespace ToDoList.Models.Database
                     Email = y.Person.Email,
                     PhoneNumber = y.Person.Phone,
                     DOB = y.Person.DateOfBirth,
-                    Bio = y.Person.Address.Suite + ": " + y.Lorem.Paragraph(),
+                    Bio = y.Person.Address.Suite + ": " + y.Lorem.Paragraph(), 
                 });
         }
     }
