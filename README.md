@@ -23,4 +23,5 @@ Podatci u bazi se generiraju ako je baza prazna.
 - klasa za generiranje podataka - DataGenerator
 - fakeri za klasu su definirani u datoteci od klase
     - osim za PersonalData, koji se generira zajedno sa UserDatom
+- Za pokretanje u Visual Studiu potreban je Workload ASP.NET and web development
 - u slučaju bilo kakvih pitanja, dostupan sam na uniri mailu
