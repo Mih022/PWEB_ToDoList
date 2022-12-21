@@ -1,7 +1,3 @@
-ToDoList/.vs/ToDoList/FileContentIndex/
-/ToDoList/.vs/ToDoList/DesignTimeBuild
-ToDoList/bin/Debug/net6.0/ToDoList.dll
-ToDoList/bin/Debug/
-ToDoList/obj/Debug/
-ToDoList/obj/staticwebassets.pack.sentinel
-ToDoList/.vs/ToDoList/v17/.suo
+ToDoList/bin/
+ToDoList/obj/
+ToDoList/.vs/

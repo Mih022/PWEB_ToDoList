@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ToDoList.Models.Database.ToDo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Komentari grupirani prema zadatcima</h1>
+
+
+@foreach (var item in Model) {
+    <h1></h1>
+
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompletedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

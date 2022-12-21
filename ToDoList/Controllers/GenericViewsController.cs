@@ -44,6 +44,10 @@ namespace ToDoList.Controllers
             return View(_context.UserDatas.Include(p => p.PersonalData));
         }
 
-
+        [HttpGet("TODO/CommentsByToDo")]
+        public IActionResult CommentsByToDo()
+        {
+            return View(_context.ToDos.Include(p => p.Comments).ThenInclude(p => p.User));
+        }
     }
 }
