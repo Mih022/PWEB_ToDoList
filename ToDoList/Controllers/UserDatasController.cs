@@ -27,7 +27,7 @@ namespace ToDoList.Controllers
         }
 
         // GET: UserDatas/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null || _context.UserDatas == null)
             {
@@ -100,7 +100,7 @@ namespace ToDoList.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,PersonalDataID")] UserData userData)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,FirstName,LastName,PersonalDataID")] UserData userData)
         {
             if (id != userData.Id)
             {
@@ -132,7 +132,7 @@ namespace ToDoList.Controllers
         }
 
         // GET: UserDatas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.UserDatas == null)
             {
@@ -169,7 +169,7 @@ namespace ToDoList.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserDataExists(int id)
+        private bool UserDataExists(string id)
         {
           return _context.UserDatas.Any(e => e.Id == id);
         }

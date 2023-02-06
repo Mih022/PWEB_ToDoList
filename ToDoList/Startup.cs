@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ToDoList.Models.Database;
+using Microsoft.AspNetCore.Identity;
 
 namespace ToDoList
 {
@@ -29,6 +31,9 @@ namespace ToDoList
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection"))
                 );
+            services.AddIdentity<UserData, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
 
             services.AddControllersWithViews();
         }
@@ -50,7 +55,7 @@ namespace ToDoList
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
