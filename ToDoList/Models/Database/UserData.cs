@@ -15,7 +15,7 @@ namespace ToDoList.Models.Database
         public string LastName { get; set; }
 
         
-        public int PersonalDataID { get; set; } // 1 to 1 polje zbog indexa
+        public int? PersonalDataID { get; set; } // 1 to 1 polje zbog indexa
         public PersonalData? PersonalData { get; set; }
 
 
