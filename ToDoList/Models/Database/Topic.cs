@@ -1,5 +1,7 @@
 ﻿using Bogus;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+//using System.Text.Json.Serialization;
 
 namespace ToDoList.Models.Database
 {
@@ -11,6 +13,7 @@ namespace ToDoList.Models.Database
         [Display(Name="Ime")]
         public string Name { get; set; }
 
+        [JsonIgnore]
         public List<ToDo>? ToDos { get; set; }
 
         public static Faker<Topic> GetFaker()

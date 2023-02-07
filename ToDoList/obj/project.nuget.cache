@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0U9fe9W6FRRWDjeZjraBsCR3USDK7LUftaHwVxioGuOcj3fVzCGCUU8V8TgJiGEd2Dh68YXzGpAb0iqA0HVZXA==",
+  "dgSpecHash": "cnSWXbTZB1GmdITmVTCMrln5qcyOB2+SKTg+og+SwHfA80Ia9ReQiVLPi1nb3JKtg1CFWXtSO481OLA8pw1A+w==",
   "success": true,
   "projectFilePath": "C:\\Users\\mihael.ladic\\Documents\\Faks\\drugi_PWEB\\PWEB_ToDoList\\ToDoList\\ToDoList.csproj",
   "expectedPackageFiles": [
@@ -81,7 +81,7 @@
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
-    "C:\\Users\\mihael.ladic\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\mihael.ladic\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\nuget.common\\6.3.1\\nuget.common.6.3.1.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\nuget.configuration\\6.3.1\\nuget.configuration.6.3.1.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\nuget.dependencyresolver.core\\6.3.1\\nuget.dependencyresolver.core.6.3.1.nupkg.sha512",

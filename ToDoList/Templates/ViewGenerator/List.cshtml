@@ -10,109 +10,182 @@
     }
     else if (Model.IsLayoutPageSelected)
     {
-@:@@{
-    @:ViewData["Title"] = "@Model.ViewName";
+        @:@@{
+        @:ViewData["Title"] = "@Model.ViewDataTypeShortName";
         if (!string.IsNullOrEmpty(Model.LayoutPageFile))
         {
-    @:Layout = "@Model.LayoutPageFile";
+            @:Layout = "@Model.LayoutPageFile";
         }
-@:}
-@:
-@:<h1>@Model.ViewName</h1>
-@:
+        @:}
+        @:
+        @:<h1>Popis @Model.ViewDataTypeShortName</h1>
+        @:
     }
     else
     {
-@:@@{
-    @:Layout = null;
-@:}
-@:
-@:<!DOCTYPE html>
-@:
-@:<html>
-@:<head>
-    @:<meta name="viewport" content="width=device-width" />
-    @:<title>Popis</title>
-@:</head>
-@:<body>
-        //    PushIndent("    ");
-    }
-@:<p>
-    @:<a asp-action="Create">Novi unos</a>
-@:</p>
-@:<table class="table">
-    @:<thead>
-        @:<tr>
-        Dictionary<string, IPropertyMetadata> propertyLookup = ((IModelMetadata)Model.ModelMetadata).Properties.ToDictionary(x => x.PropertyName, x => x);
-        Dictionary<string, INavigationMetadata> navigationLookup = ((IModelMetadata)Model.ModelMetadata).Navigations.ToDictionary(x => x.AssociationPropertyName, x => x);
+        @:@@{
+        @:Layout = null;
+        @:}
+        @:
+        @:<!DOCTYPE html>
+        @:
+        @:<html>
+        @:<head>
+            @:<meta name="viewport" content="width=device-width" />
+            @:<title>@Model.ViewDataTypeShortName</title>
+        @:</head>
+        @:<body>
+            //    PushIndent("    ");
+        }
+        @:<p>
+            @:<a asp-action="Create" class="btn btn-primary">Novi unos</a>
+        @:</p>
+        @:<div class="row">
+        @:<div class="col-12">
+        @:<table class="table dataTable" id="tablica">
+            @:<thead>
+                @:<tr>
+                    Dictionary<string, IPropertyMetadata> propertyLookup = ((IModelMetadata)Model.ModelMetadata).Properties.ToDictionary(x => x.PropertyName, x => x);
+                    Dictionary<string, INavigationMetadata> navigationLookup = ((IModelMetadata)Model.ModelMetadata).Navigations.ToDictionary(x => x.AssociationPropertyName, x => x);
+                    <th>
+                        @@Html.DisplayNameFor(model => model.First().ID)
+                    </th>
+                    foreach (var item in Model.ModelMetadata.ModelType.GetProperties())
+                    {
+                        if (propertyLookup.TryGetValue(item.Name, out IPropertyMetadata property)
+                            && property.Scaffold && !property.IsForeignKey && !property.IsPrimaryKey)
+                        {
+                            <th>
+                                @@Html.DisplayNameFor(model => model.First().@GetValueExpression(property))
+                            </th>
+                        }
+                        else if (navigationLookup.TryGetValue(item.Name, out INavigationMetadata navigation))
+                        {
+                            <th>
+                                @@Html.DisplayNameFor(model => model.First().@GetValueExpression(navigation))
+                            </th>
+                        }
+                    }
+                    @:<th></th>
+                @:</tr>
+            @:</thead>
 
-        foreach (var item in Model.ModelMetadata.ModelType.GetProperties())
+        @:</table>
+        @:</div>
+        @:</div>
+        if (!Model.IsPartialView && !Model.IsLayoutPageSelected)
         {
-            if (propertyLookup.TryGetValue(item.Name, out IPropertyMetadata property)
-                && property.Scaffold && !property.IsForeignKey && !property.IsPrimaryKey)
-            {
-            <th>
-                @@Html.DisplayNameFor(model => model.@GetValueExpression(property))
-            </th>
-            }
-            else if (navigationLookup.TryGetValue(item.Name, out INavigationMetadata navigation))
-            {
-            <th>
-                @@Html.DisplayNameFor(model => model.@GetValueExpression(navigation))
-            </th>
-            }
-        }
-            @:<th></th>
-        @:</tr>
-    @:</thead>
-    @:<tbody>
-@:@@foreach (var item in Model) {
-        @:<tr>
-        foreach (var item in Model.ModelMetadata.ModelType.GetProperties())
-        {
-            if (propertyLookup.TryGetValue(item.Name, out IPropertyMetadata property)
-                && property.Scaffold && !property.IsForeignKey && !property.IsPrimaryKey)
-            {
-            <td>
-                @@Html.DisplayFor(modelItem => item.@GetValueExpression(property))
-            </td>
-            }
-            else if (navigationLookup.TryGetValue(item.Name, out INavigationMetadata navigation))
-            {
-            <td>
-                @@Html.DisplayFor(modelItem => item.@GetValueExpression(navigation).@navigation.DisplayPropertyName)
-            </td>
-            }
-        }
-        string pkName = GetPrimaryKeyName();
-        if (pkName != null)
-        {
-            @:<td>
-                @:<a asp-action="Edit" asp-route-id="@@item.@pkName">Edit</a> |
-                @:<a asp-action="Details" asp-route-id="@@item.@pkName">Details</a> |
-                @:<a asp-action="Delete" asp-route-id="@@item.@pkName">Delete</a>
-            @:</td>
-        }
-        else
-        {
-            <td>
-                @@Html.ActionLink("Uređivanje", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @@Html.ActionLink("Detalji", "Details", new { /* id=item.PrimaryKey */ }) |
-                @@Html.ActionLink("Brisanje", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        }
-        @:</tr>
-@:}
-    @:</tbody>
-
-@:</table>
-    if(!Model.IsPartialView && !Model.IsLayoutPageSelected)
-    {
-        //ClearIndent();
-@:</body>
-@:</html>
-    }
+            //ClearIndent();
+        @:</body>
+    @:</html>
 }
+
+string b = Model.ViewDataTypeShortName;
+@:
+@:@@section scripts{
+@:
+@:<script type="text/javascript" src="~/lib/datatables/DataTables-1.11.3/js/jquery.dataTables.min.js"></script>
+@:<script type="text/javascript" src="~/lib/datatables/DataTables-1.11.3/js/dataTables.bootstrap4.min.js"></script>
+@:<script type="text/javascript" src="~/lib/datatables/Buttons-2.0.1/js/dataTables.buttons.min.js"></script>
+@:<script type="text/javascript" src="~/lib/datatables/Buttons-2.0.1/js/buttons.bootstrap4.min.js"></script>
+@:<script type="text/javascript" src="~/lib/datatables/Select-1.3.3/js/dataTables.select.min.js"></script>
+@:<script type="text/javascript" src="~/lib/datatables/DateTime-1.1.1/js/dataTables.dateTime.min.js"></script>
+@:<script type="text/javascript" src="~/lib/datatables/Editor-2.0.5/js/dataTables.editor.min.js"></script>
+@:<script type="text/javascript" src="~/lib/datatables/Editor-2.0.5/js/editor.bootstrap4.min.js"></script>
+@:<script type="text/javascript" src="~/js/MomentJS_dateFormat.js"></script>
+@:<script type="text/javascript" src="~/js/MomentJS.js"></script>
+@:<script type="text/javascript" src="~/js/generate_uuid.js"></script>
+@:<script type="text/javascript" src="~/js/DataTableLocalisation.js"></script>
+@:<script type="text/javascript" src="~/lib/datatables/selectpicker.js"></script>
+
+@:<link rel="stylesheet" href="~/lib/datatables/DataTables-1.11.3/css/dataTables.bootstrap4.min.css" />
+@:<link rel="stylesheet" href="~/lib/datatables/Buttons-2.0.1/css/buttons.bootstrap4.min.css" />
+@:<link rel="stylesheet" href="~/lib/datatables/Select-1.3.3/css/select.bootstrap4.min.css" />
+@:<link rel="stylesheet" href="~/lib/datatables/DateTime-1.1.1/css/dataTables.dateTime.min.css" />
+@:<link rel="stylesheet" href="~/lib/datatables/Editor-2.0.5/css/editor.bootstrap4.min.css" />
+@:
+<script>
+    var Data = @@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.@(Model.ViewDataTypeName)));
+    var Table = $('#tablica');
+
+    var detailsIcon = 'Detalji';
+    var editIcon = 'Uređivanje';
+    var deleteIcon = 'Brisanje';
+
+    $(document).ready(function () {
+        if (Data != null) {
+            loadTable(Data);
+        }
+    });
+
+    function loadTable(tableData) {
+        Table.DataTable({
+            language: croatian,
+            stateSave: true,
+            lengthMenu: [[-1, 10, 25, 50], ["Sve", 10, 25, 50]],
+            data: tableData,
+            columns: [
+                {
+                    data: 'ID',
+                    visible: false
+                },
+                @{ foreach (var item in Model.ModelMetadata.ModelType.GetProperties())
+                    {
+                        if (propertyLookup.TryGetValue(item.Name, out IPropertyMetadata property)
+                            && property.Scaffold && !property.IsForeignKey && !property.IsPrimaryKey)
+                        {
+                @:{
+                    @: data: '@GetValueExpression(property)',
+                    if(property.TypeName == "System.DateTime")
+                            {
+                            @: render: function(data, type) {
+                            @:        if (type === 'sort')
+                            @:        {
+                            @:            return data;
+                            @:        }
+                            @:        else
+                            @:        {
+                            @:            var a = moment(data).format('DD.MM.YYYY.');
+                            @:            if (a == 'Invalid date')
+                            @:            {
+                            @:                a = nulll;
+                            @:            }
+                            @:            return a;
+                            @:        }
+                            @:    }
+                            }
+                @:},
+                        }
+                        else if (navigationLookup.TryGetValue(item.Name, out INavigationMetadata navigation))
+                        {
+                @:{
+                    @:data: '@GetValueExpression(navigation)'
+                @:},
+                        }
+                    }
+                 }
+                {
+                    className: 'dt-body-right',
+                    width: 160,
+                    orderable: false,
+                    render: function (data, type, row) {
+                            var DetailsLink = 'href="@b/details?id=' + row.ID + '"';
+                            var EditLink = 'href="@b/edit?id=' + row.ID + '"';
+                            var DeleteLink = 'href="@b/delete?id=' + row.ID + '"';
+                            return '<a class="btn btn-sm btn-outline-primary TCButton"' + DetailsLink + '>' + detailsIcon + '</a>' +
+                                '<a class="btn btn-sm btn-outline-primary TCButton"' + EditLink + '>' + editIcon + '</a>' +
+                                '<a class="btn btn-sm btn-outline-primary TCButton"' + DeleteLink + '>' + deleteIcon + '</a>';
+                        }
+                    }
+            ]
+        });
+    }
+
+</script>
+}
+}
+
+
 @functions
 {
     string GetPrimaryKeyName()
