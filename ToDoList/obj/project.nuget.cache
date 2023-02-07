@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "4ZeBL7vFsU2d4oc5PCGh/04iRC6qceyp0vN4l+eZ/N14oXwnUYvVkHHANhmJxS55teWRjueYf9jcVyjXU+qzig==",
+  "dgSpecHash": "0U9fe9W6FRRWDjeZjraBsCR3USDK7LUftaHwVxioGuOcj3fVzCGCUU8V8TgJiGEd2Dh68YXzGpAb0iqA0HVZXA==",
   "success": true,
   "projectFilePath": "C:\\Users\\mihael.ladic\\Documents\\Faks\\drugi_PWEB\\PWEB_ToDoList\\ToDoList\\ToDoList.csproj",
   "expectedPackageFiles": [
@@ -13,7 +13,6 @@
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.13\\microsoft.aspnetcore.cryptography.keyderivation.6.0.13.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\6.0.12\\microsoft.aspnetcore.diagnostics.entityframeworkcore.6.0.12.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.13\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.13.nupkg.sha512",
-    "C:\\Users\\mihael.ladic\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\7.0.2\\microsoft.aspnetcore.identity.ui.7.0.2.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\6.0.0\\microsoft.aspnetcore.razor.language.6.0.0.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\microsoft.build\\17.3.2\\microsoft.build.17.3.2.nupkg.sha512",
