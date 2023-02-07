@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ToDoList.Data;
 using ToDoList.Models.ViewModels;
 
-namespace ToDoList.Controllers
+namespace ToDoList.Controllers.Admin
 {
     public class GenericViewsController : Controller
     {
@@ -19,7 +19,7 @@ namespace ToDoList.Controllers
         public IActionResult toDosByUser(string name)
         {
             var user = _context.UserDatas.FirstOrDefault(p => p.FirstName.ToLower() == name.ToLower());
-            if(user == null) return NotFound("Nije pronađen korisnik s tim imenom");
+            if (user == null) return NotFound("Nije pronađen korisnik s tim imenom");
 
             var tasks = _context.User_ToDo_Relations.Include(p => p.ToDo)
                                                     .ThenInclude(p => p.Topic)
@@ -29,7 +29,7 @@ namespace ToDoList.Controllers
                                                     .ToList();
 
 
-            return View(new UserTasksVM() { User = user, ToDos = tasks});
+            return View(new UserTasksVM() { User = user, ToDos = tasks });
         }
 
         [HttpGet("TODO/Topics")]

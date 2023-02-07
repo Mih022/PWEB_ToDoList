@@ -8,87 +8,87 @@ using Microsoft.EntityFrameworkCore;
 using ToDoList.Data;
 using ToDoList.Models.Database;
 
-namespace ToDoList.Controllers
+namespace ToDoList.Controllers.Admin
 {
-    public class TopicsController : Controller
+    public class PersonalDatasController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public TopicsController(ApplicationDbContext context)
+        public PersonalDatasController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Topics
+        // GET: PersonalDatas
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Topics.ToListAsync());
+            return View(await _context.PersonalDatas.ToListAsync());
         }
 
-        // GET: Topics/Details/5
+        // GET: PersonalDatas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Topics == null)
+            if (id == null || _context.PersonalDatas == null)
             {
                 return NotFound();
             }
 
-            var topic = await _context.Topics
+            var personalData = await _context.PersonalDatas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (topic == null)
+            if (personalData == null)
             {
                 return NotFound();
             }
 
-            return View(topic);
+            return View(personalData);
         }
 
-        // GET: Topics/Create
+        // GET: PersonalDatas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Topics/Create
+        // POST: PersonalDatas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Topic topic)
+        public async Task<IActionResult> Create([Bind("Id,Email,PhoneNumber,DOB,Bio")] PersonalData personalData)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(topic);
+                _context.Add(personalData);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(topic);
+            return View(personalData);
         }
 
-        // GET: Topics/Edit/5
+        // GET: PersonalDatas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Topics == null)
+            if (id == null || _context.PersonalDatas == null)
             {
                 return NotFound();
             }
 
-            var topic = await _context.Topics.FindAsync(id);
-            if (topic == null)
+            var personalData = await _context.PersonalDatas.FindAsync(id);
+            if (personalData == null)
             {
                 return NotFound();
             }
-            return View(topic);
+            return View(personalData);
         }
 
-        // POST: Topics/Edit/5
+        // POST: PersonalDatas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Topic topic)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,PhoneNumber,DOB,Bio")] PersonalData personalData)
         {
-            if (id != topic.Id)
+            if (id != personalData.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace ToDoList.Controllers
             {
                 try
                 {
-                    _context.Update(topic);
+                    _context.Update(personalData);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TopicExists(topic.Id))
+                    if (!PersonalDataExists(personalData.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +113,49 @@ namespace ToDoList.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(topic);
+            return View(personalData);
         }
 
-        // GET: Topics/Delete/5
+        // GET: PersonalDatas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Topics == null)
+            if (id == null || _context.PersonalDatas == null)
             {
                 return NotFound();
             }
 
-            var topic = await _context.Topics
+            var personalData = await _context.PersonalDatas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (topic == null)
+            if (personalData == null)
             {
                 return NotFound();
             }
 
-            return View(topic);
+            return View(personalData);
         }
 
-        // POST: Topics/Delete/5
+        // POST: PersonalDatas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Topics == null)
+            if (_context.PersonalDatas == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Topic'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.PersonalData'  is null.");
             }
-            var topic = await _context.Topics.FindAsync(id);
-            if (topic != null)
+            var personalData = await _context.PersonalDatas.FindAsync(id);
+            if (personalData != null)
             {
-                _context.Topics.Remove(topic);
+                _context.PersonalDatas.Remove(personalData);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TopicExists(int id)
+        private bool PersonalDataExists(int id)
         {
-          return _context.Topics.Any(e => e.Id == id);
+            return _context.PersonalDatas.Any(e => e.Id == id);
         }
     }
 }

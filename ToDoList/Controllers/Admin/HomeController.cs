@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ToDoList.Models;
 
-namespace ToDoList.Controllers
+namespace ToDoList.Controllers.Admin
 {
     public class HomeController : Controller
     {

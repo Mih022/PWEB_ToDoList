@@ -8,92 +8,87 @@ using Microsoft.EntityFrameworkCore;
 using ToDoList.Data;
 using ToDoList.Models.Database;
 
-namespace ToDoList.Controllers
+namespace ToDoList.Controllers.Admin
 {
-    public class ToDosController : Controller
+    public class TopicsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ToDosController(ApplicationDbContext context)
+        public TopicsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: ToDos
+        // GET: Topics
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ToDos.Include(t => t.Topic);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Topics.ToListAsync());
         }
 
-        // GET: ToDos/Details/5
+        // GET: Topics/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.ToDos == null)
+            if (id == null || _context.Topics == null)
             {
                 return NotFound();
             }
 
-            var toDo = await _context.ToDos
-                .Include(t => t.Topic)
+            var topic = await _context.Topics
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (toDo == null)
+            if (topic == null)
             {
                 return NotFound();
             }
 
-            return View(toDo);
+            return View(topic);
         }
 
-        // GET: ToDos/Create
+        // GET: Topics/Create
         public IActionResult Create()
         {
-            ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name");
             return View();
         }
 
-        // POST: ToDos/Create
+        // POST: Topics/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,CreatedDate,CompletedDate,TopicID")] ToDo toDo)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Topic topic)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(toDo);
+                _context.Add(topic);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name", toDo.TopicID);
-            return View(toDo);
+            return View(topic);
         }
 
-        // GET: ToDos/Edit/5
+        // GET: Topics/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.ToDos == null)
+            if (id == null || _context.Topics == null)
             {
                 return NotFound();
             }
 
-            var toDo = await _context.ToDos.FindAsync(id);
-            if (toDo == null)
+            var topic = await _context.Topics.FindAsync(id);
+            if (topic == null)
             {
                 return NotFound();
             }
-            ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name", toDo.TopicID);
-            return View(toDo);
+            return View(topic);
         }
 
-        // POST: ToDos/Edit/5
+        // POST: Topics/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,CreatedDate,CompletedDate,TopicID")] ToDo toDo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Topic topic)
         {
-            if (id != toDo.Id)
+            if (id != topic.Id)
             {
                 return NotFound();
             }
@@ -102,12 +97,12 @@ namespace ToDoList.Controllers
             {
                 try
                 {
-                    _context.Update(toDo);
+                    _context.Update(topic);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ToDoExists(toDo.Id))
+                    if (!TopicExists(topic.Id))
                     {
                         return NotFound();
                     }
@@ -118,51 +113,49 @@ namespace ToDoList.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name", toDo.TopicID);
-            return View(toDo);
+            return View(topic);
         }
 
-        // GET: ToDos/Delete/5
+        // GET: Topics/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.ToDos == null)
+            if (id == null || _context.Topics == null)
             {
                 return NotFound();
             }
 
-            var toDo = await _context.ToDos
-                .Include(t => t.Topic)
+            var topic = await _context.Topics
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (toDo == null)
+            if (topic == null)
             {
                 return NotFound();
             }
 
-            return View(toDo);
+            return View(topic);
         }
 
-        // POST: ToDos/Delete/5
+        // POST: Topics/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.ToDos == null)
+            if (_context.Topics == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.ToDos'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Topic'  is null.");
             }
-            var toDo = await _context.ToDos.FindAsync(id);
-            if (toDo != null)
+            var topic = await _context.Topics.FindAsync(id);
+            if (topic != null)
             {
-                _context.ToDos.Remove(toDo);
+                _context.Topics.Remove(topic);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ToDoExists(int id)
+        private bool TopicExists(int id)
         {
-          return _context.ToDos.Any(e => e.Id == id);
+            return _context.Topics.Any(e => e.Id == id);
         }
     }
 }

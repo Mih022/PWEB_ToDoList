@@ -8,87 +8,92 @@ using Microsoft.EntityFrameworkCore;
 using ToDoList.Data;
 using ToDoList.Models.Database;
 
-namespace ToDoList.Controllers
+namespace ToDoList.Controllers.Admin
 {
-    public class PersonalDatasController : Controller
+    public class ToDosController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public PersonalDatasController(ApplicationDbContext context)
+        public ToDosController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: PersonalDatas
+        // GET: ToDos
         public async Task<IActionResult> Index()
         {
-              return View(await _context.PersonalDatas.ToListAsync());
+            var applicationDbContext = _context.ToDos.Include(t => t.Topic);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: PersonalDatas/Details/5
+        // GET: ToDos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.PersonalDatas == null)
+            if (id == null || _context.ToDos == null)
             {
                 return NotFound();
             }
 
-            var personalData = await _context.PersonalDatas
+            var toDo = await _context.ToDos
+                .Include(t => t.Topic)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (personalData == null)
+            if (toDo == null)
             {
                 return NotFound();
             }
 
-            return View(personalData);
+            return View(toDo);
         }
 
-        // GET: PersonalDatas/Create
+        // GET: ToDos/Create
         public IActionResult Create()
         {
+            ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name");
             return View();
         }
 
-        // POST: PersonalDatas/Create
+        // POST: ToDos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Email,PhoneNumber,DOB,Bio")] PersonalData personalData)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,CreatedDate,CompletedDate,TopicID")] ToDo toDo)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(personalData);
+                _context.Add(toDo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(personalData);
+            ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name", toDo.TopicID);
+            return View(toDo);
         }
 
-        // GET: PersonalDatas/Edit/5
+        // GET: ToDos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.PersonalDatas == null)
+            if (id == null || _context.ToDos == null)
             {
                 return NotFound();
             }
 
-            var personalData = await _context.PersonalDatas.FindAsync(id);
-            if (personalData == null)
+            var toDo = await _context.ToDos.FindAsync(id);
+            if (toDo == null)
             {
                 return NotFound();
             }
-            return View(personalData);
+            ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name", toDo.TopicID);
+            return View(toDo);
         }
 
-        // POST: PersonalDatas/Edit/5
+        // POST: ToDos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,PhoneNumber,DOB,Bio")] PersonalData personalData)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,CreatedDate,CompletedDate,TopicID")] ToDo toDo)
         {
-            if (id != personalData.Id)
+            if (id != toDo.Id)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace ToDoList.Controllers
             {
                 try
                 {
-                    _context.Update(personalData);
+                    _context.Update(toDo);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonalDataExists(personalData.Id))
+                    if (!ToDoExists(toDo.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +118,51 @@ namespace ToDoList.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(personalData);
+            ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name", toDo.TopicID);
+            return View(toDo);
         }
 
-        // GET: PersonalDatas/Delete/5
+        // GET: ToDos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.PersonalDatas == null)
+            if (id == null || _context.ToDos == null)
             {
                 return NotFound();
             }
 
-            var personalData = await _context.PersonalDatas
+            var toDo = await _context.ToDos
+                .Include(t => t.Topic)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (personalData == null)
+            if (toDo == null)
             {
                 return NotFound();
             }
 
-            return View(personalData);
+            return View(toDo);
         }
 
-        // POST: PersonalDatas/Delete/5
+        // POST: ToDos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.PersonalDatas == null)
+            if (_context.ToDos == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.PersonalData'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.ToDos'  is null.");
             }
-            var personalData = await _context.PersonalDatas.FindAsync(id);
-            if (personalData != null)
+            var toDo = await _context.ToDos.FindAsync(id);
+            if (toDo != null)
             {
-                _context.PersonalDatas.Remove(personalData);
+                _context.ToDos.Remove(toDo);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PersonalDataExists(int id)
+        private bool ToDoExists(int id)
         {
-          return _context.PersonalDatas.Any(e => e.Id == id);
+            return _context.ToDos.Any(e => e.Id == id);
         }
     }
 }

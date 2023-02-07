@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ToDoList.Data;
 using ToDoList.Models.Database;
 
-namespace ToDoList.Controllers
+namespace ToDoList.Controllers.Admin
 {
     public class CommentsController : Controller
     {
@@ -159,14 +159,14 @@ namespace ToDoList.Controllers
             {
                 _context.Comments.Remove(comment);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CommentExists(int id)
         {
-          return _context.Comments.Any(e => e.Id == id);
+            return _context.Comments.Any(e => e.Id == id);
         }
     }
 }

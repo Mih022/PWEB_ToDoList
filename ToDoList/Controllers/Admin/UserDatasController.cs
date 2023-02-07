@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ToDoList.Data;
 using ToDoList.Models.Database;
 
-namespace ToDoList.Controllers
+namespace ToDoList.Controllers.Admin
 {
     public class UserDatasController : Controller
     {
@@ -74,7 +74,7 @@ namespace ToDoList.Controllers
         }
 
         // GET: UserDatas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.UserDatas == null)
             {
@@ -89,7 +89,7 @@ namespace ToDoList.Controllers
             var takenPDs = _context.UserDatas.Where(p => p.PersonalDataID != null)
                                 .Select(p => p.PersonalDataID)
                                 .ToList();
-            var validPDs = _context.Set<PersonalData>().Where(p => !takenPDs.Contains(p.Id) || 
+            var validPDs = _context.Set<PersonalData>().Where(p => !takenPDs.Contains(p.Id) ||
                                                             p.Id == userData.PersonalDataID);
             ViewData["PersonalDataID"] = new SelectList(validPDs, "Id", "Email");
             return View(userData);
@@ -164,14 +164,14 @@ namespace ToDoList.Controllers
             {
                 _context.UserDatas.Remove(userData);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserDataExists(string id)
         {
-          return _context.UserDatas.Any(e => e.Id == id);
+            return _context.UserDatas.Any(e => e.Id == id);
         }
     }
 }
