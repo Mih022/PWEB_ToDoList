@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ToDoList.Models.Database.Topic>
+
+        @{
+        ViewData["Title"] = "Teme";
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        
+        <h1>Popis Tema</h1>
+        
+        <div class="row">
+        <div class="col-12">
+        <table class="table dataTable" id="tablica">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Id)
+                    </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().Name)
+                            </th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+        </div>
+        </div>
+
+@section scripts{
+
+<script type="text/javascript" src="~/lib/datatables/DataTables-1.11.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="~/lib/datatables/DataTables-1.11.3/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="~/lib/datatables/Buttons-2.0.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="~/lib/datatables/Buttons-2.0.1/js/buttons.bootstrap4.min.js"></script>
+<script type="text/javascript" src="~/lib/datatables/Select-1.3.3/js/dataTables.select.min.js"></script>
+<script type="text/javascript" src="~/lib/datatables/DateTime-1.1.1/js/dataTables.dateTime.min.js"></script>
+<script type="text/javascript" src="~/lib/datatables/Editor-2.0.5/js/dataTables.editor.min.js"></script>
+<script type="text/javascript" src="~/lib/datatables/Editor-2.0.5/js/editor.bootstrap4.min.js"></script>
+<script type="text/javascript" src="~/js/MomentJS_dateFormat.js"></script>
+<script type="text/javascript" src="~/js/MomentJS.js"></script>
+<script type="text/javascript" src="~/js/generate_uuid.js"></script>
+<script type="text/javascript" src="~/js/DataTableLocalisation.js"></script>
+<script type="text/javascript" src="~/lib/datatables/selectpicker.js"></script>
+<link rel="stylesheet" href="~/lib/datatables/DataTables-1.11.3/css/dataTables.bootstrap4.min.css" />
+<link rel="stylesheet" href="~/lib/datatables/Buttons-2.0.1/css/buttons.bootstrap4.min.css" />
+<link rel="stylesheet" href="~/lib/datatables/Select-1.3.3/css/select.bootstrap4.min.css" />
+<link rel="stylesheet" href="~/lib/datatables/DateTime-1.1.1/css/dataTables.dateTime.min.css" />
+<link rel="stylesheet" href="~/lib/datatables/Editor-2.0.5/css/editor.bootstrap4.min.css" />
+
+<script>
+    var Data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    var Table = $('#tablica');
+
+    var detailsIcon = 'Detalji';
+    var editIcon = 'Uređivanje';
+    var deleteIcon = 'Brisanje';
+
+    $(document).ready(function () {
+        if (Data != null) {
+            loadTable(Data);
+        }
+    });
+
+    function loadTable(tableData) {
+        Table.DataTable({
+            language: croatian,
+            stateSave: true,
+            lengthMenu: [[-1, 10, 25, 50], ["Sve", 10, 25, 50]],
+            data: tableData,
+            columns: [
+                {
+                    data: 'Id',
+                    visible: false
+                },
+                {
+                     data: 'Name',
+                },
+                {
+                    className: 'dt-body-right',
+                    width: 160,
+                    orderable: false,
+                    render: function (data, type, row) {
+                            var DetailsLink = 'href="App_Topics/details?id=' + row.Id + '"';
+                            return '<a class="btn btn-sm btn-outline-primary TCButton"' + DetailsLink + '>' + detailsIcon + '</a>'
+                        }
+                    }
+            ]
+        });
+    }
+
+</script>
+}
+
+
