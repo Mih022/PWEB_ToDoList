@@ -6,17 +6,4 @@
     <h1 class="display-4">To Do</h1>
     <h2>Dobrodošli</h2>
 </div>
-<div class="text-left">
-    <h3>Admin stranice (za provjeru, nisu kompletne):</h3>
-    <ul>
-        <li><a class="text-dark" asp-area="" asp-controller="Topics" asp-action="Index">Teme</a></li>
-        <li><a class="text-dark" asp-area="" asp-controller="ToDos" asp-action="Index">Zadatci</a></li>
-        <li><a class="text-dark" asp-area="" asp-controller="Comments" asp-action="Index">Komentari</a></li>
-        <li><a class="text-dark" asp-area="" asp-controller="UserDatas" asp-action="Index">Korisnici</a></li>
-        <li><a class="text-dark" asp-area="" asp-controller="PersonalDatas" asp-action="Index">Korisnički podatci</a></li>
-    </ul>
-</div>
-<div class="text-left">
-    @{await Html.RenderPartialAsync("_Used_routes");}
-</div>
 

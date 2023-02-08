@@ -25,7 +25,8 @@ namespace ToDoList.Models.Database
             return new Faker<Comment>("hr")
                 .RuleFor(p => p.Text, x => $"{x.Hacker.Phrase()}")
                 .RuleFor(p => p.ToDoID, x => x.PickRandom(toDoIDs))
-                .RuleFor(p => p.UserID, x => x.PickRandom(userIDs));
+                .RuleFor(p => p.UserID, x => x.PickRandom(userIDs))
+                .RuleFor(p => p.CommentDate, x => x.Date.Between(DateTime.Today.AddYears(-1), DateTime.Today));
         }
     }
 }

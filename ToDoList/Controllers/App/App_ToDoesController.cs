@@ -51,8 +51,11 @@ namespace ToDoList.Controllers.App
                 .Include(t => t.Topic)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
+            if (toDo == null) return NotFound();
+
             var comments = _context.Comments.Include(p => p.User)
                                             .Where(p => p.ToDoID == toDo.Id)
+                                            .OrderBy(p => p.CommentDate)
                                             .ToList();
             if (toDo == null)
             {
