@@ -1,4 +1,4 @@
-﻿@model ToDoList.Models.Database.ToDo
+﻿@model ToDoList.Controllers.App.App_ToDoesController.DetailsViewModel
 
     @{
     ViewData["Title"] = "Details";
@@ -11,42 +11,76 @@
     <hr />
     <dl class="row">
             <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.ToDo.Name)
             </dt>
             <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Name)
+                @Html.DisplayFor(model => model.ToDo.Name)
             </dd>
             <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.ToDo.Description)
             </dt>
             <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Description)
+                @Html.DisplayFor(model => model.ToDo.Description)
             </dd>
             <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.CreatedDate)
+                @Html.DisplayNameFor(model => model.ToDo.CreatedDate)
             </dt>
             <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.CreatedDate)
+                @Html.DisplayFor(model => model.ToDo.CreatedDate)
             </dd>
             <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.CompletedDate)
+                @Html.DisplayNameFor(model => model.ToDo.CompletedDate)
             </dt>
             <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.CompletedDate)
+                @Html.DisplayFor(model => model.ToDo.CompletedDate)
             </dd>
             <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Topic)
+                @Html.DisplayNameFor(model => model.ToDo.Topic)
             </dt>
             <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Topic.Name)
+                @Html.DisplayFor(model => model.ToDo.Topic.Name)
             </dd>
     </dl>
 </div>
 <div>
-    @if(Model.CompletedDate == null){
-            <a class="btn btn-primary" asp-action="Resolve" asp-route-id="@Model?.Id">Zatvaranje</a>
+    @if(Model.ToDo.CompletedDate == null){
+            <a class="btn btn-primary" asp-action="Resolve" asp-route-id="@Model?.ToDo?.Id">Zatvaranje</a>
     }
     |
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Uređivanje</a> |
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.ToDo?.Id">Uređivanje</a> |
     <a class="btn btn-primary" asp-action="Index">Povratak na listu</a>
+</div>
+<br /><br /><br />
+<div id="comments">
+    <h2>Komentari</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    
+                </th>
+                <th>
+                    
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Comments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CommentDate)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-primary" asp-controller="App_Comments" asp-action="Create" asp-route-todoID="@Model.ToDo.Id">Komentiraj</a>
 </div>

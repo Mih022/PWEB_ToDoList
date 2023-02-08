@@ -22,6 +22,12 @@ namespace ToDoList.Controllers.App
             _userManager = userManager;
         }
 
+        public class DetailsViewModel
+        {
+            public ToDo ToDo { get; set; }
+            public IEnumerable<Comment> Comments { get; set; }
+        }
+
         // GET: AppToDoes
         public async Task<IActionResult> Index()
         {
@@ -44,12 +50,16 @@ namespace ToDoList.Controllers.App
             var toDo = await _context.ToDos
                 .Include(t => t.Topic)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            var comments = _context.Comments.Include(p => p.User)
+                                            .Where(p => p.ToDoID == toDo.Id)
+                                            .ToList();
             if (toDo == null)
             {
                 return NotFound();
             }
 
-            return View(toDo);
+            return View(new DetailsViewModel() { ToDo = toDo, Comments = comments});
         }
 
         // GET: AppToDoes/Create

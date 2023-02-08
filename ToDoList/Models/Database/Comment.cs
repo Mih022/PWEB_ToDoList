@@ -17,6 +17,8 @@ namespace ToDoList.Models.Database
         public string UserID { get; set; }
         public UserData? User { get; set; }
 
+        public DateTime CommentDate { get; set; }
+
 
         public static Faker<Comment> GetFaker(List<string> userIDs, List<int> toDoIDs)
         {
