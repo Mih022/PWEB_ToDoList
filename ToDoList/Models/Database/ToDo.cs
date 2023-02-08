@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace ToDoList.Models.Database
@@ -26,8 +27,9 @@ namespace ToDoList.Models.Database
 
         [Display(Name = "Tema")]
         public Topic? Topic { get; set; }
-        
-        public List<Comment> Comments { get; set; }
+
+        [JsonIgnore]
+        public List<Comment>? Comments { get; set; }
 
         public static Faker<ToDo> GetFaker(List<int> topicIDs)
         {

@@ -5,7 +5,7 @@
             Layout = "~/Views/Shared/_Layout.cshtml";
         }
         
-        <h1>Popis ToDo</h1>
+        <h1>Moji zadaci</h1>
         
         <p>
             <a asp-action="Create" class="btn btn-primary">Novi unos</a>
@@ -94,24 +94,36 @@
                 },
                 {
                      data: 'CreatedDate',
-                             render: function(data, type) {
-                                    if (type === 'sort')
-                                    {
-                                        return data;
-                                    }
-                                    else
-                                    {
-                                        var a = moment(data).format('DD.MM.YYYY.');
-                                        if (a == 'Invalid date')
-                                        {
-                                            a = nulll;
-                                        }
-                                        return a;
-                                    }
+                     render: function(data, type) {
+                            if (type === 'sort')
+                            {
+                                return data;
+                            }
+                            else
+                            {
+                                var a = moment(data).format('DD.MM.YYYY.');
+                                if (a == 'Invalid date')
+                                {
+                                    a = null;
                                 }
+                                return a;
+                            }
+                     }
                 },
                 {
-                     data: 'CompletedDate',
+                    data: 'CompletedDate',
+                    render: function (data, type) {
+                        if (type === 'sort') {
+                            return data;
+                        }
+                        else {
+                            var a = moment(data).format('DD.MM.YYYY.');
+                            if (a == 'Invalid date') {
+                                a = null;
+                            }
+                            return a;
+                        }
+                    }
                 },
                 {
                     data: 'Topic.Name'

@@ -9,12 +9,12 @@ namespace ToDoList.Models.Database
     {
 
         [PersonalData]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
         [PersonalData]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
-        public DateTime DOB { get; set; }
-        public string Bio { get; set; }
+        public DateTime? DOB { get; set; }
+        public string? Bio { get; set; }
 
 
         public static Faker<UserData> GetFaker()

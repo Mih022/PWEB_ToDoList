@@ -29,8 +29,12 @@ namespace ToDoList.Controllers.App
             public string? Id { get; set; }
 
             [DataType(DataType.Text)]
-            [Display(Name = "Ime i prezime")]
-            public string? Name { get; set; }
+            [Display(Name = "Ime")]
+            public string? FirstName { get; set; }
+
+            [DataType(DataType.Text)]
+            [Display(Name = "Prezime")]
+            public string? LastName { get; set; }
 
 
             [Display(Name = "Datum rođenja")]
@@ -76,7 +80,8 @@ namespace ToDoList.Controllers.App
             {
                 Username = userName,
                 Id = id,
-                Name = user.FirstName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 DOB = user.DOB,
                 PhoneNumber = phoneNumber,
                 Bio = user.Bio,
@@ -140,9 +145,14 @@ namespace ToDoList.Controllers.App
                 }
             }
 
-            if (Input.Name != user.FirstName)
+            if (Input.FirstName != user.FirstName)
             {
-                user.FirstName = Input.Name;
+                user.FirstName = Input.FirstName;
+            }
+
+            if (Input.LastName != user.LastName)
+            {
+                user.LastName = Input.LastName;
             }
 
             if (Input.DOB != user.DOB && Input.DOB != null)

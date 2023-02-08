@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,17 +14,23 @@ namespace ToDoList.Controllers.App
     public class App_ToDoesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<UserData> _userManager;
 
-        public App_ToDoesController(ApplicationDbContext context)
+        public App_ToDoesController(ApplicationDbContext context, UserManager<UserData> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: AppToDoes
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ToDos.Include(t => t.Topic);
-            return View(await applicationDbContext.ToListAsync());
+            var user = await _userManager.GetUserAsync(User);
+            var todos = _context.User_ToDo_Relations.Include(p => p.ToDo)
+                                                    .ThenInclude(p => p.Topic)
+                                                    .Where(p => p.UserId == user.Id)
+                                                    .Select(p => p.ToDo);
+            return View(await todos.ToListAsync());
         }
 
         // GET: AppToDoes/Details/5
@@ -59,14 +66,31 @@ namespace ToDoList.Controllers.App
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,CreatedDate,CompletedDate,TopicID")] ToDo toDo)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(toDo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name", toDo.TopicID);
+                return View(toDo);
             }
-            ViewData["TopicID"] = new SelectList(_context.Topics, "Id", "Name", toDo.TopicID);
-            return View(toDo);
+
+            using var transaction = _context.Database.BeginTransaction();
+
+            var user = await _userManager.GetUserAsync(User);
+
+            toDo.CreatedDate = DateTime.Today;
+            _context.Add(toDo);
+            await _context.SaveChangesAsync();
+
+            var relation = new User_ToDo_Relation()
+            {
+                UserId = user.Id,
+                ToDoID = toDo.Id
+            };
+            _context.User_ToDo_Relations.Add(relation);
+            await _context.SaveChangesAsync();
+
+            transaction.Commit();
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AppToDoes/Edit/5
@@ -102,6 +126,9 @@ namespace ToDoList.Controllers.App
             {
                 try
                 {
+                    var oldTodo = _context.ToDos.AsNoTracking().FirstOrDefault(p => p.Id == id);
+                    toDo.CreatedDate = oldTodo.CreatedDate;
+                    toDo.CompletedDate = oldTodo.CompletedDate;
                     _context.Update(toDo);
                     await _context.SaveChangesAsync();
                 }
@@ -158,6 +185,27 @@ namespace ToDoList.Controllers.App
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: AppToDoes/Resolve/5
+        public async Task<IActionResult> Resolve(int? id)
+        {
+            if (id == null || _context.ToDos == null)
+            {
+                return NotFound();
+            }
+
+            var toDo = await _context.ToDos.FindAsync(id);
+            if (toDo == null)
+            {
+                return NotFound();
+            }
+
+            toDo.CompletedDate = DateTime.Now;
+            _context.Update(toDo);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new {id = id});
         }
 
         private bool ToDoExists(int id)

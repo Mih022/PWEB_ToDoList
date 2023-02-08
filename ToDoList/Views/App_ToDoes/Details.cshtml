@@ -43,6 +43,10 @@
     </dl>
 </div>
 <div>
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Uređivanje</a> |
-        <a asp-action="Index">Povratak na listu</a>
+    @if(Model.CompletedDate == null){
+            <a class="btn btn-primary" asp-action="Resolve" asp-route-id="@Model?.Id">Zatvaranje</a>
+    }
+    |
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Uređivanje</a> |
+    <a class="btn btn-primary" asp-action="Index">Povratak na listu</a>
 </div>
