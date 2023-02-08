@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
 using ToDoList;
 using ToDoList.Data;
+using ToDoList.Models.Database;
 
 namespace ToDoList
 {
@@ -30,7 +32,8 @@ namespace ToDoList
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
-                    DataGenerator.Generate(context);
+                    var uManager = services.GetRequiredService<UserManager<UserData>>();
+                    DataGenerator.Generate(context, uManager);
                 }
                 catch (Exception ex)
                 {

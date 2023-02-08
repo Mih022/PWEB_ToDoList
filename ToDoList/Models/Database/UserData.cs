@@ -20,7 +20,7 @@ namespace ToDoList.Models.Database
         public static Faker<UserData> GetFaker()
         {
             return new Faker<UserData>("hr")
-                .RuleFor(x => x.UserName, y => y.Person.FirstName + y.Person.LastName)
+                .RuleFor(x => x.UserName, y => y.Person.Email)
                 .RuleFor(x => x.FirstName, y => y.Person.FirstName)
                 .RuleFor(x => x.LastName, y => y.Person.LastName)
                 .RuleFor(x => x.DOB, y => y.Person.DateOfBirth)

@@ -1,23 +1,34 @@
 ﻿using Bogus;
+using Microsoft.AspNetCore.Identity;
 using ToDoList.Models.Database;
 
 namespace ToDoList.Data
 {
     public class DataGenerator
     {
-        public static void Generate(ApplicationDbContext context)
+        public static void Generate(ApplicationDbContext context, UserManager<UserData> userManager)
         {
-            const int userCount = 10;
+            const int userCount = 2;
             const int toDoCount = 100;
             const int topicCount = 5;
             const int usToDoRelationCount = 150;
             const int commentCount = 200;
 
             //skip if already generated
-            if (context.PersonalDatas.Count() != 0) return;
+            if (context.UserDatas.Count() != 0) return;
 
             var userFaker = UserData.GetFaker();
-            context.UserDatas.AddRange(userFaker.Generate(userCount));
+            var users = userFaker.Generate(userCount);
+            foreach (var userData in users)
+            {
+                //var user = CreateUser();
+                //user.FirstName = userData.FirstName;
+                //user.LastName = userData.LastName;
+                //user.DOB = userData.DOB;
+                //user.Bio = userData.Bio;
+                //var a = userManager.SetUserNameAsync(user, userData.UserName);
+                var b = userManager.CreateAsync(userData, "password");
+            }
             context.SaveChanges();
 
             var topicFaker = Topic.GetFaker();
@@ -37,6 +48,20 @@ namespace ToDoList.Data
             var commentFaker = Comment.GetFaker(userIDs, todoIDs);
             context.Comments.AddRange(commentFaker.Generate(commentCount));
             context.SaveChanges();
+        }
+
+        private static UserData CreateUser()
+        {
+            try
+            {
+                return Activator.CreateInstance<UserData>();
+            }
+            catch
+            {
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
+                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+            }
         }
     }
 }
