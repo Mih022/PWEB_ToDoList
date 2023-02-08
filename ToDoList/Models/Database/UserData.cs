@@ -5,7 +5,6 @@ using System.Security.Policy;
 
 namespace ToDoList.Models.Database
 {
-    [Index(nameof(PersonalDataID))]
     public class UserData : IdentityUser
     {
 
@@ -14,9 +13,8 @@ namespace ToDoList.Models.Database
         [PersonalData]
         public string LastName { get; set; }
 
-        
-        public int? PersonalDataID { get; set; } // 1 to 1 polje zbog indexa
-        public PersonalData? PersonalData { get; set; }
+        public DateTime DOB { get; set; }
+        public string Bio { get; set; }
 
 
         public static Faker<UserData> GetFaker()
@@ -25,13 +23,8 @@ namespace ToDoList.Models.Database
                 .RuleFor(x => x.UserName, y => y.Person.FirstName + y.Person.LastName)
                 .RuleFor(x => x.FirstName, y => y.Person.FirstName)
                 .RuleFor(x => x.LastName, y => y.Person.LastName)
-                .RuleFor(x => x.PersonalData, y => new PersonalData()
-                {
-                    Email = y.Person.Email,
-                    PhoneNumber = y.Person.Phone,
-                    DOB = y.Person.DateOfBirth,
-                    Bio = y.Person.Address.Suite + ": " + y.Lorem.Paragraph(), 
-                });
+                .RuleFor(x => x.DOB, y => y.Person.DateOfBirth)
+                .RuleFor(x => x.Bio, y => y.Person.Address.Suite + ": " + y.Lorem.Paragraph());
         }
     }
 }

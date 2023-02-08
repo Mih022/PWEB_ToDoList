@@ -41,7 +41,7 @@ namespace ToDoList.Controllers.Admin
         [HttpGet("TODO/UserData")]
         public IActionResult UsersWithData()
         {
-            return View(_context.UserDatas.Include(p => p.PersonalData));
+            return View(_context.UserDatas);
         }
 
         [HttpGet("TODO/CommentsByToDo")]

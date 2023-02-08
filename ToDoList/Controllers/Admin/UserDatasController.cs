@@ -22,7 +22,7 @@ namespace ToDoList.Controllers.Admin
         // GET: UserDatas
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.UserDatas.Include(u => u.PersonalData);
+            var applicationDbContext = _context.UserDatas;
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace ToDoList.Controllers.Admin
             }
 
             var userData = await _context.UserDatas
-                .Include(u => u.PersonalData)
+                
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (userData == null)
             {
@@ -48,11 +48,11 @@ namespace ToDoList.Controllers.Admin
         // GET: UserDatas/Create
         public IActionResult Create()
         {
-            var takenPDs = _context.UserDatas.Where(p => p.PersonalDataID != null)
-                                            .Select(p => p.PersonalDataID)
-                                            .ToList();
-            var validPDs = _context.Set<PersonalData>().Where(p => !takenPDs.Contains(p.Id));
-            ViewData["PersonalDataID"] = new SelectList(validPDs, "Id", "Id");
+            //var takenPDs = _context.UserDatas.Where(p => p.PersonalDataID != null)
+            //                                .Select(p => p.PersonalDataID)
+            //                                .ToList();
+            //var validPDs = _context.Set<PersonalData>().Where(p => !takenPDs.Contains(p.Id));
+            //ViewData["PersonalDataID"] = new SelectList(validPDs, "Id", "Id");
             return View();
         }
 
@@ -69,7 +69,6 @@ namespace ToDoList.Controllers.Admin
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PersonalDataID"] = new SelectList(_context.Set<PersonalData>(), "Id", "Id", userData.PersonalDataID);
             return View(userData);
         }
 
@@ -86,12 +85,6 @@ namespace ToDoList.Controllers.Admin
             {
                 return NotFound();
             }
-            var takenPDs = _context.UserDatas.Where(p => p.PersonalDataID != null)
-                                .Select(p => p.PersonalDataID)
-                                .ToList();
-            var validPDs = _context.Set<PersonalData>().Where(p => !takenPDs.Contains(p.Id) ||
-                                                            p.Id == userData.PersonalDataID);
-            ViewData["PersonalDataID"] = new SelectList(validPDs, "Id", "Email");
             return View(userData);
         }
 
@@ -127,7 +120,6 @@ namespace ToDoList.Controllers.Admin
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PersonalDataID"] = new SelectList(_context.Set<PersonalData>(), "Id", "Id", userData.PersonalDataID);
             return View(userData);
         }
 
@@ -140,7 +132,7 @@ namespace ToDoList.Controllers.Admin
             }
 
             var userData = await _context.UserDatas
-                .Include(u => u.PersonalData)
+                
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (userData == null)
             {

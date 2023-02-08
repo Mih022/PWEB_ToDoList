@@ -12,13 +12,13 @@
 @foreach (var item in Model) {
     <h2>@item.FirstName @item.LastName</h2>
     <ul>
-        <li>Datum rođenja: @item.PersonalData.DOB</li>
-        <li>Email: @item.PersonalData.Email</li>
-        <li>Broj telefona: @item.PersonalData.PhoneNumber</li>
+        <li>Datum rođenja: @item.DOB</li>
+        <li>Email: @item.Email</li>
+        <li>Broj telefona: @item.PhoneNumber</li>
     </ul>
     <h4>Kratki opis:</h4>
     <p>
-        @item.PersonalData.Bio
+        @item.Bio
     </p>
     <br />
 }
