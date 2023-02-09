@@ -35,6 +35,7 @@ namespace ToDoList.Controllers.App
             var todos = _context.User_ToDo_Relations.Include(p => p.ToDo)
                                                     .ThenInclude(p => p.Topic)
                                                     .Where(p => p.UserId == user.Id)
+                                                    .OrderBy(p => p.ToDo.CompletedDate)
                                                     .Select(p => p.ToDo);
             return View(await todos.ToListAsync());
         }

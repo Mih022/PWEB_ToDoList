@@ -95,7 +95,7 @@
                 {
                      data: 'CreatedDate',
                      render: function(data, type) {
-                            if (type === 'sort')
+                            if (type !== 'display')
                             {
                                 return data;
                             }
@@ -104,7 +104,7 @@
                                 var a = moment(data).format('DD.MM.YYYY.');
                                 if (a == 'Invalid date')
                                 {
-                                    a = null;
+                                    a = "-";
                                 }
                                 return a;
                             }
@@ -113,7 +113,7 @@
                 {
                     data: 'CompletedDate',
                     render: function (data, type) {
-                        if (type === 'sort') {
+                        if (type !== 'display') {
                             return data;
                         }
                         else {
