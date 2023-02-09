@@ -14,7 +14,7 @@ Podatci u bazi se generiraju ako je baza prazna.
     - database.sqlite-wal
     - database.sqlite-shm
 - stvoriti novu bazu
-    - u Package Manager Console pokrenuti naredbu Update-database
+    - u Package Manager Console pokrenuti naredbu Update-database (ili, ako to ne radi, 'EntityFrameworkCore\Update-Database)
 
 ## Ostale napomene
 - u ASP.NET-u ne postoji routes datoteka

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cnSWXbTZB1GmdITmVTCMrln5qcyOB2+SKTg+og+SwHfA80Ia9ReQiVLPi1nb3JKtg1CFWXtSO481OLA8pw1A+w==",
+  "dgSpecHash": "Uv9203AKDIka9mCpvJPVrGmOGC6rliOvzak5c5unFx6CRfeCWnpNKkgtaTEpKLpBQJR480nQpynM5cMbHQ4uGg==",
   "success": true,
   "projectFilePath": "C:\\Users\\mihael.ladic\\Documents\\Faks\\drugi_PWEB\\PWEB_ToDoList\\ToDoList\\ToDoList.csproj",
   "expectedPackageFiles": [
@@ -192,7 +192,8 @@
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\mihael.ladic\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\mihael.ladic\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\mihael.ladic\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\mihael.ladic\\.nuget\\packages\\xunit.assert\\2.4.2\\xunit.assert.2.4.2.nupkg.sha512"
   ],
   "logs": []
 }

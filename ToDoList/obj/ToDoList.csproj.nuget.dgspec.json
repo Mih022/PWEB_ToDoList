@@ -79,6 +79,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.2, )"
+            },
+            "xunit.assert": {
+              "target": "Package",
+              "version": "[2.4.2, )"
             }
           },
           "imports": [
