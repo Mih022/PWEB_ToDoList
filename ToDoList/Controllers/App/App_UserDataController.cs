@@ -56,7 +56,7 @@ namespace ToDoList.Controllers.App
 
             //[DataType(DataType.Password)]
             [Display(Name = "Potvrdite novu lozinku")]
-            //[Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+            [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
             public string? ConfirmPassword { get; set; }
 
             public string? StatusMessage { get; set; }
@@ -120,7 +120,7 @@ namespace ToDoList.Controllers.App
             if (!ModelState.IsValid)
             {
                 await LoadAsync(user);
-                return View();
+                return View(Input);
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
@@ -182,25 +182,25 @@ namespace ToDoList.Controllers.App
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: App_UserDataController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //// GET: App_UserDataController/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
-        // POST: App_UserDataController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //// POST: App_UserDataController/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
